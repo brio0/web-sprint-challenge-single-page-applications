@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import Form from './components/Form';
+import Pizza from './Pizza';
 import schema from './validation/formSchema';
 import * as yup from 'yup';
 import { Link, Route, Switch } from 'react-router-dom'
@@ -62,13 +62,13 @@ const App = () => {
       <h1>Lambda Eats</h1>
       <nav>
 
-        <Link to='/components/Form' id='order-pizza'>Order</Link>
+        <Link to='/Pizza' id='order-pizza'>Order</Link>
         <Link to='/'>Home</Link>
       </nav>
       <Switch>
 
-        <Route path='/components/Form' >
-          <Form
+        <Route path='/Pizza' >
+          <Pizza
             values={formValues}
             change={inputChange}
             submit={formSubmit}
