@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import Pizza from './Pizza';
+import Pizza from './pizza';
 import schema from './validation/formSchema';
 import * as yup from 'yup';
 import { Link, Route, Switch } from 'react-router-dom'
@@ -45,12 +45,31 @@ const App = () => {
     setFormValues({ ...formValues, [name]: value });
   }
 
-  const formSubmit = () => {
-    axios.post('https://reqres.in/api/orders')
+  const postOrder = orders => {
+    axios.post('https://reqres.in/api/orders', orders)
       .then(res => {
-        setOrder(res.data, ...order)
+        console.log(res.data)
+        console.log(order)
+        // setOrder(order => ({
+        //   ...order,
+        //   ...res.data
+        // }))
       })
       .catch(err => console.error(err))
+      .finally(() => setFormValues(initialFormValues))
+  }
+
+  const formSubmit = () => {
+    const newOrder = {
+      name: formValues.name.trim(),
+      size: formValues.size.trim(),
+      sauce: formValues.sauce.trim(),
+      special: formValues.special.trim(),
+      toppings: ['pepporoni', 'sausage', 'onion', 'bacon', 'mushrooms'].filter(topping => !!formValues[topping])
+    }
+
+    postOrder(newOrder)
+
   }
 
   useEffect(() => {
@@ -62,12 +81,12 @@ const App = () => {
       <h1>Lambda Eats</h1>
       <nav>
 
-        <Link to='/Pizza' id='order-pizza'>Order</Link>
+        <Link to='/pizza' id='order-pizza'>Order</Link>
         <Link to='/'>Home</Link>
       </nav>
       <Switch>
 
-        <Route path='/Pizza' >
+        <Route path='/pizza' >
           <Pizza
             values={formValues}
             change={inputChange}

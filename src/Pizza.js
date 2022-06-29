@@ -22,24 +22,24 @@ const Form = (props) => {
 
 
     return (
-        <div id='pizza-form'>
+        <div >
             <p>{errors.name}</p>
             <p>{errors.size} </p>
             <p>{errors.sauce} </p>
 
-            <form onSubmit={onSubmit}>
-                <label id='name-input'>Name
+            <form onSubmit={onSubmit} id='pizza-form'>
+                <label>Name
                     <input
+                        id='name-input'
                         type='text'
                         name='name'
                         onChange={onChange}
                         value={values.name}
-
                     />
                 </label>
                 <label>Select size:
-                    <div id='size-dropdown'>
-                        <select values={values.size} name='size' onChange={onChange}>
+                    <div >
+                        <select id='size-dropdown' values={values.size} name='size' onChange={onChange}>
                             <option value=''>Select size</option>
                             <option value='small'>Small</option>
                             <option value='medium'>Medium</option>
@@ -87,7 +87,7 @@ const Form = (props) => {
                         </label>
                     </div>
                 </label>
-                <label>Add Topings:
+                <label>Add Toppings:
                     <div>
                         <label>Pepporoni
                             <input
@@ -142,7 +142,7 @@ const Form = (props) => {
                         />
                     </div>
                 </label>
-                <button id='order-button' disabled={disabled}>submit</button>
+                <button id='order-button' type='submit' disabled={disabled}>submit</button>
             </form>
         </div>
     )
